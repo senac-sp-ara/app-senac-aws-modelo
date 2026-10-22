@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: aws-modelo
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
