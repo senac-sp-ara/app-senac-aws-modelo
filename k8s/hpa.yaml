@@ -1,14 +1,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: aws-modelo-hpa
+  name: hello-aws-service-hpa
   labels:
-    app: aws-modelo
+    app: hello-aws-service
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: aws-modelo-deployment
+    name: hello-aws-service-deployment
   minReplicas: 1    # Mínimo de Pods em repouso
   maxReplicas: 3    # Máximo de Pods sob carga pesada
   metrics:

@@ -11,7 +11,7 @@ permissions:
 
 env:
   AWS_REGION: us-east-2
-  ECR_REPOSITORY: aws-modelo
+  ECR_REPOSITORY: hello-aws-service
   EKS_CLUSTER_NAME: cluster-app-senac-aws
 
 jobs:
@@ -71,11 +71,11 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Substitui dinamicamente a tag da imagem no deployment.yaml pelo SHA do commit atual
-        sed -i "s|556890483198.dkr.ecr.us-east-2.amazonaws.com/aws-modelo:latest|$REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" k8s/deployment.yaml
+        sed -i "s|556890483198.dkr.ecr.us-east-2.amazonaws.com/hello-aws-service:latest|$REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" k8s/deployment.yaml
 
         kubectl apply -f k8s/service.yaml
         kubectl apply -f k8s/deployment.yaml
         kubectl apply -f k8s/hpa.yaml
 
         # Aguarda a instância ficar pronta e saudável
-        kubectl rollout status deployment/aws-modelo-deployment --timeout=180s
+        kubectl rollout status deployment/hello-aws-service-deployment --timeout=180s
