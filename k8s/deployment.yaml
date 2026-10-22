@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aws-modelo-deployment
+  name: hello-aws-service-deployment
   labels:
-    app: aws-modelo
+    app: hello-aws-service
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: aws-modelo
+      app: hello-aws-service
   template:
     metadata:
       labels:
-        app: aws-modelo
+        app: hello-aws-service
     spec:
       containers:
-      - name: aws-modelo-container
-        image: 556890483198.dkr.ecr.us-east-2.amazonaws.com/aws-modelo:latest
+      - name: hello-aws-service-container
+        image: 556890483198.dkr.ecr.us-east-2.amazonaws.com/hello-aws-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
