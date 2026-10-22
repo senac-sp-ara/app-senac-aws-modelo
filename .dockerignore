@@ -1,0 +1,6 @@
+target/
+.git/
+.github/
+.vscode/
+k8s/
+*.md

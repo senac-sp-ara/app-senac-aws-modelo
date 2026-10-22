@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-modelo-deployment
+  labels:
+    app: aws-modelo
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: aws-modelo
+  template:
+    metadata:
+      labels:
+        app: aws-modelo
+    spec:
+      containers:
+      - name: aws-modelo-container
+        image: 556890483198.dkr.ecr.us-east-2.amazonaws.com/aws-modelo:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 5
